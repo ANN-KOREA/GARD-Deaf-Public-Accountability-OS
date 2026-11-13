@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "schema_version": "1.0.0",
+    "dataset_id": "GARD-DPA-SYNTHETIC-20261113-PUBLIC-2026-11-13",
+    "title": "합성 시설·재정·서비스·성과 연계 실습데이터 | 공개 승인본",
+    "as_of_date": "2026-11-13",
+    "dataset_kind": "synthetic_demo",
+    "publication_scope": "reviewer_approved",
+    "contains_personal_data": false,
+    "facility_reference": {
+      "count": null,
+      "as_of_date": null,
+      "source_note": "가상 시설 3개만 포함. 206 또는 약 208 시설 실제 명부 아님."
+    },
+    "min_public_cell_n": 10,
+    "method_notes": "공개승인: 소표본 전체 연동 계수 마스킹; 비공개 출처와 미승인 기관 제외. 원본의 자유서술 내부 메모는 공개하지 않음. 실제 익명성은 별도 검토 필요."
+  },
+  "organizations": [
+    {
+      "org_id": "SYN-ORG-001",
+      "org_name": "가상 공익법인 가",
+      "legal_form": "nonprofit_association",
+      "role": "facility_operator",
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    },
+    {
+      "org_id": "SYN-ORG-002",
+      "org_name": "가상 지방 공공기관 나",
+      "legal_form": "public_body",
+      "role": "facility_operator",
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    }
+  ],
+  "facilities": [
+    {
+      "facility_id": "SYN-FAC-001",
+      "facility_name": "가상시 A 수어통역센터",
+      "region_code": "SYN-01",
+      "region_name": "가상시 A",
+      "facility_type": "local_sign_interpretation_center",
+      "operator_org_id": "SYN-ORG-001",
+      "operating_status": "active",
+      "as_of_date": "2026-11-13",
+      "valid_from": "2025-01-01",
+      "valid_to": null,
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    },
+    {
+      "facility_id": "SYN-FAC-002",
+      "facility_name": "가상시 B 수어통역센터",
+      "region_code": "SYN-02",
+      "region_name": "가상시 B",
+      "facility_type": "local_sign_interpretation_center",
+      "operator_org_id": "SYN-ORG-002",
+      "operating_status": "active",
+      "as_of_date": "2026-11-13",
+      "valid_from": "2025-01-01",
+      "valid_to": null,
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    },
+    {
+      "facility_id": "SYN-FAC-003",
+      "facility_name": "가상시 C 수어통역센터",
+      "region_code": "SYN-03",
+      "region_name": "가상시 C",
+      "facility_type": "local_sign_interpretation_center",
+      "operator_org_id": null,
+      "operating_status": "unknown",
+      "as_of_date": "2026-11-13",
+      "valid_from": "2026-01-01",
+      "valid_to": null,
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    }
+  ],
+  "finances": [
+    {
+      "finance_id": "SYN-FIN-001",
+      "facility_id": "SYN-FAC-001",
+      "fiscal_year": 2026,
+      "funding_type": "local_government",
+      "accounting_stage": "appropriation",
+      "amount_krw": 400000000,
+      "money_flow_id": "SYN-FLOW-001",
+      "purpose_code": "facility_operations",
+      "recipient_org_id": "SYN-ORG-001",
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    },
+    {
+      "finance_id": "SYN-FIN-002",
+      "facility_id": "SYN-FAC-001",
+      "fiscal_year": 2026,
+      "funding_type": "local_government",
+      "accounting_stage": "disbursement",
+      "amount_krw": 370000000,
+      "money_flow_id": "SYN-FLOW-001",
+      "purpose_code": "facility_operations",
+      "recipient_org_id": "SYN-ORG-001",
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    },
+    {
+      "finance_id": "SYN-FIN-003",
+      "facility_id": "SYN-FAC-002",
+      "fiscal_year": 2026,
+      "funding_type": "local_government",
+      "accounting_stage": "appropriation",
+      "amount_krw": 210000000,
+      "money_flow_id": "SYN-FLOW-002",
+      "purpose_code": "facility_operations",
+      "recipient_org_id": "SYN-ORG-002",
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    }
+  ],
+  "staff_aggregates": [
+    {
+      "staff_record_id": "SYN-STAFF-001",
+      "facility_id": "SYN-FAC-001",
+      "as_of_date": "2026-10-31",
+      "sign_interpreters": null,
+      "deaf_interpreters": null,
+      "other_staff": null,
+      "fte": null,
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    },
+    {
+      "staff_record_id": "SYN-STAFF-002",
+      "facility_id": "SYN-FAC-002",
+      "as_of_date": "2026-10-31",
+      "sign_interpreters": null,
+      "deaf_interpreters": null,
+      "other_staff": null,
+      "fte": null,
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    }
+  ],
+  "services": [
+    {
+      "service_record_id": "SYN-SRV-001",
+      "facility_id": "SYN-FAC-001",
+      "period_start": "2026-01-01",
+      "period_end": "2026-10-31",
+      "service_type": "sign_interpretation",
+      "count_unit": "distinct_requests",
+      "requests_total": 1200,
+      "completed_requests": 900,
+      "unserved_requests": 120,
+      "cancelled_by_user": 100,
+      "pending_requests": 80,
+      "completed_service_events": 1100,
+      "unique_users": 220,
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    },
+    {
+      "service_record_id": "SYN-SRV-002",
+      "facility_id": "SYN-FAC-002",
+      "period_start": "2026-01-01",
+      "period_end": "2026-10-31",
+      "service_type": "sign_interpretation",
+      "count_unit": "distinct_requests",
+      "requests_total": 650,
+      "completed_requests": 500,
+      "unserved_requests": 75,
+      "cancelled_by_user": 25,
+      "pending_requests": 50,
+      "completed_service_events": 660,
+      "unique_users": null,
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome_id": "SYN-OUT-001",
+      "facility_id": "SYN-FAC-001",
+      "period_start": "2026-01-01",
+      "period_end": "2026-10-31",
+      "outcome_type": "made_own_decision",
+      "study_design": "post_only_self_report",
+      "cohort_population": "가상시 A 수어통역 서비스 이용자 중 응답자",
+      "eligible_cohort_count": 220,
+      "respondents": 80,
+      "positive_responses": 60,
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    }
+  ],
+  "governance": [
+    {
+      "governance_id": "SYN-GOV-001",
+      "org_id": "SYN-ORG-001",
+      "fiscal_year": 2026,
+      "eligible_voters": null,
+      "ballots_cast": null,
+      "formal_complaints_received": null,
+      "formal_complaints_resolved": null,
+      "record_status": "synthetic_only",
+      "evidence_ids": [
+        "SYN-EV-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "SYN-EV-001",
+      "title": "합성 데이터 설계용 문서 (공식·실제 기록 아님)",
+      "source_kind": "synthetic",
+      "issuer": "GARD DPA Demo Generator",
+      "document_date": "2026-11-13",
+      "access_date": "2026-11-13",
+      "url": null,
+      "content_sha256": null,
+      "access_scope": "public",
+      "verification_state": "synthetic_only"
+    }
+  ],
+  "reviews": []
+}

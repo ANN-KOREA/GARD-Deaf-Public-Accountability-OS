@@ -1,0 +1,771 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/gard-dpa/v1/schema.json",
+  "title": "GARD Deaf Public Accountability OS - v1 data bundle",
+  "description": "Data interchange schema. Legal, statistical and audit validity requires separate checks. Demo must be labelled synthetic.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meta",
+    "organizations",
+    "facilities",
+    "finances",
+    "staff_aggregates",
+    "services",
+    "outcomes",
+    "governance",
+    "evidence",
+    "reviews"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "dataset_id",
+        "title",
+        "as_of_date",
+        "dataset_kind",
+        "publication_scope",
+        "contains_personal_data",
+        "facility_reference",
+        "min_public_cell_n"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "dataset_id": {
+          "type": "string",
+          "minLength": 5
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3
+        },
+        "as_of_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "dataset_kind": {
+          "enum": [
+            "synthetic_demo",
+            "real_observation",
+            "mixed_internal"
+          ]
+        },
+        "publication_scope": {
+          "enum": [
+            "owner_only",
+            "reviewer_approved"
+          ]
+        },
+        "contains_personal_data": {
+          "type": "boolean"
+        },
+        "facility_reference": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "count",
+            "as_of_date",
+            "source_note"
+          ],
+          "properties": {
+            "count": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "as_of_date": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date"
+            },
+            "source_note": {
+              "type": "string"
+            }
+          }
+        },
+        "min_public_cell_n": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "method_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "organizations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/organization"
+      }
+    },
+    "facilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/facility"
+      }
+    },
+    "finances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/finance"
+      }
+    },
+    "staff_aggregates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/staff"
+      }
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/service"
+      }
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/outcome"
+      }
+    },
+    "governance": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/governance"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/review"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,100}$"
+    },
+    "n": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "money": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "KRW; no floating point and no scale ambiguity"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "verification_state": {
+      "enum": [
+        "claim_only",
+        "source_documented",
+        "reviewed",
+        "independently_verified",
+        "missing",
+        "synthetic_only",
+        "disputed"
+      ]
+    },
+    "organization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "org_id",
+        "org_name",
+        "legal_form",
+        "role",
+        "record_status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "org_id": {
+          "$ref": "#/$defs/id"
+        },
+        "org_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "legal_form": {
+          "enum": [
+            "nonprofit_association",
+            "social_welfare_corporation",
+            "social_cooperative",
+            "public_body",
+            "company",
+            "other",
+            "unknown"
+          ]
+        },
+        "role": {
+          "enum": [
+            "facility_operator",
+            "funding_body",
+            "service_provider",
+            "oversight_body",
+            "other"
+          ]
+        },
+        "record_status": {
+          "$ref": "#/$defs/verification_state"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/source_refs"
+        }
+      }
+    },
+    "facility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "facility_id",
+        "facility_name",
+        "region_code",
+        "region_name",
+        "facility_type",
+        "operator_org_id",
+        "operating_status",
+        "as_of_date",
+        "valid_from",
+        "valid_to",
+        "record_status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "facility_id": {
+          "$ref": "#/$defs/id"
+        },
+        "facility_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "region_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "region_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "facility_type": {
+          "enum": [
+            "local_sign_interpretation_center",
+            "central_sign_interpretation_center",
+            "other"
+          ]
+        },
+        "operator_org_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "operating_status": {
+          "enum": [
+            "active",
+            "suspended",
+            "closed",
+            "unknown"
+          ]
+        },
+        "as_of_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "valid_from": {
+          "type": "string",
+          "format": "date"
+        },
+        "valid_to": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "record_status": {
+          "$ref": "#/$defs/verification_state"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/source_refs"
+        }
+      }
+    },
+    "finance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "finance_id",
+        "facility_id",
+        "fiscal_year",
+        "funding_type",
+        "accounting_stage",
+        "amount_krw",
+        "money_flow_id",
+        "purpose_code",
+        "recipient_org_id",
+        "record_status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "finance_id": {
+          "$ref": "#/$defs/id"
+        },
+        "facility_id": {
+          "$ref": "#/$defs/id"
+        },
+        "fiscal_year": {
+          "type": "integer",
+          "minimum": 2000,
+          "maximum": 2200
+        },
+        "funding_type": {
+          "enum": [
+            "central_government",
+            "local_government",
+            "mixed_matching",
+            "facility_earned_income",
+            "organization_unrestricted",
+            "donation_restricted",
+            "contract_payment",
+            "other"
+          ]
+        },
+        "accounting_stage": {
+          "enum": [
+            "appropriation",
+            "grant_decision",
+            "disbursement",
+            "expense",
+            "settlement"
+          ]
+        },
+        "amount_krw": {
+          "$ref": "#/$defs/money"
+        },
+        "money_flow_id": {
+          "$ref": "#/$defs/id"
+        },
+        "purpose_code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recipient_org_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "record_status": {
+          "$ref": "#/$defs/verification_state"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/source_refs"
+        }
+      }
+    },
+    "staff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "staff_record_id",
+        "facility_id",
+        "as_of_date",
+        "sign_interpreters",
+        "deaf_interpreters",
+        "other_staff",
+        "fte",
+        "record_status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "staff_record_id": {
+          "$ref": "#/$defs/id"
+        },
+        "facility_id": {
+          "$ref": "#/$defs/id"
+        },
+        "as_of_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "sign_interpreters": {
+          "$ref": "#/$defs/n"
+        },
+        "deaf_interpreters": {
+          "$ref": "#/$defs/n"
+        },
+        "other_staff": {
+          "$ref": "#/$defs/n"
+        },
+        "fte": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "record_status": {
+          "$ref": "#/$defs/verification_state"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/source_refs"
+        }
+      }
+    },
+    "service": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "service_record_id",
+        "facility_id",
+        "period_start",
+        "period_end",
+        "service_type",
+        "count_unit",
+        "requests_total",
+        "completed_requests",
+        "unserved_requests",
+        "cancelled_by_user",
+        "pending_requests",
+        "completed_service_events",
+        "unique_users",
+        "record_status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "service_record_id": {
+          "$ref": "#/$defs/id"
+        },
+        "facility_id": {
+          "$ref": "#/$defs/id"
+        },
+        "period_start": {
+          "type": "string",
+          "format": "date"
+        },
+        "period_end": {
+          "type": "string",
+          "format": "date"
+        },
+        "service_type": {
+          "enum": [
+            "sign_interpretation",
+            "counseling",
+            "sign_education",
+            "other"
+          ]
+        },
+        "count_unit": {
+          "const": "distinct_requests"
+        },
+        "requests_total": {
+          "$ref": "#/$defs/n"
+        },
+        "completed_requests": {
+          "$ref": "#/$defs/n"
+        },
+        "unserved_requests": {
+          "$ref": "#/$defs/n"
+        },
+        "cancelled_by_user": {
+          "$ref": "#/$defs/n"
+        },
+        "pending_requests": {
+          "$ref": "#/$defs/n"
+        },
+        "completed_service_events": {
+          "$ref": "#/$defs/n"
+        },
+        "unique_users": {
+          "$ref": "#/$defs/n"
+        },
+        "record_status": {
+          "$ref": "#/$defs/verification_state"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/source_refs"
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome_id",
+        "facility_id",
+        "period_start",
+        "period_end",
+        "outcome_type",
+        "study_design",
+        "cohort_population",
+        "eligible_cohort_count",
+        "respondents",
+        "positive_responses",
+        "record_status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "outcome_id": {
+          "$ref": "#/$defs/id"
+        },
+        "facility_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "period_start": {
+          "type": "string",
+          "format": "date"
+        },
+        "period_end": {
+          "type": "string",
+          "format": "date"
+        },
+        "outcome_type": {
+          "enum": [
+            "understood_information",
+            "made_own_decision",
+            "problem_resolved",
+            "independent_participation",
+            "other"
+          ]
+        },
+        "study_design": {
+          "enum": [
+            "post_only_self_report",
+            "pre_post_uncontrolled",
+            "controlled_comparison",
+            "administrative_observed",
+            "other"
+          ]
+        },
+        "cohort_population": {
+          "type": "string",
+          "minLength": 4
+        },
+        "eligible_cohort_count": {
+          "$ref": "#/$defs/n"
+        },
+        "respondents": {
+          "$ref": "#/$defs/n"
+        },
+        "positive_responses": {
+          "$ref": "#/$defs/n"
+        },
+        "record_status": {
+          "$ref": "#/$defs/verification_state"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/source_refs"
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "governance_id",
+        "org_id",
+        "fiscal_year",
+        "eligible_voters",
+        "ballots_cast",
+        "formal_complaints_received",
+        "formal_complaints_resolved",
+        "record_status",
+        "evidence_ids"
+      ],
+      "properties": {
+        "governance_id": {
+          "$ref": "#/$defs/id"
+        },
+        "org_id": {
+          "$ref": "#/$defs/id"
+        },
+        "fiscal_year": {
+          "type": "integer",
+          "minimum": 2000
+        },
+        "eligible_voters": {
+          "$ref": "#/$defs/n"
+        },
+        "ballots_cast": {
+          "$ref": "#/$defs/n"
+        },
+        "formal_complaints_received": {
+          "$ref": "#/$defs/n"
+        },
+        "formal_complaints_resolved": {
+          "$ref": "#/$defs/n"
+        },
+        "record_status": {
+          "$ref": "#/$defs/verification_state"
+        },
+        "evidence_ids": {
+          "$ref": "#/$defs/source_refs"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "title",
+        "source_kind",
+        "issuer",
+        "document_date",
+        "access_date",
+        "url",
+        "content_sha256",
+        "access_scope",
+        "verification_state"
+      ],
+      "properties": {
+        "evidence_id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3
+        },
+        "source_kind": {
+          "enum": [
+            "government",
+            "parliament",
+            "local_government",
+            "organization",
+            "independent_audit",
+            "user_statement",
+            "synthetic"
+          ]
+        },
+        "issuer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "access_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "content_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "access_scope": {
+          "enum": [
+            "public",
+            "owner_only",
+            "restricted"
+          ]
+        },
+        "verification_state": {
+          "$ref": "#/$defs/verification_state"
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "review_id",
+        "target_kind",
+        "target_id",
+        "reviewer_role",
+        "review_date",
+        "decision",
+        "notes"
+      ],
+      "properties": {
+        "review_id": {
+          "$ref": "#/$defs/id"
+        },
+        "target_kind": {
+          "enum": [
+            "facility",
+            "organization",
+            "finance",
+            "staff",
+            "service",
+            "outcome",
+            "governance",
+            "evidence"
+          ]
+        },
+        "target_id": {
+          "$ref": "#/$defs/id"
+        },
+        "reviewer_role": {
+          "enum": [
+            "data_owner",
+            "source_checker",
+            "independent_reviewer"
+          ]
+        },
+        "review_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "decision": {
+          "enum": [
+            "accepted",
+            "needs_evidence",
+            "rejected",
+            "synthetic_only"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
